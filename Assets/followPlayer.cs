@@ -5,12 +5,11 @@ public class followPlayer : MonoBehaviour
    public Transform player;
 
     public const int offsetX = 0;
-    public const int offsetY = 235;
-    public const int offsetZ = -160;
+    public const int offsetY = 570;
+    public const int offsetZ = -400;
     public Vector3 offset = new Vector3(offsetX, offsetY, offsetZ);
 
     public const int rotationX = 310;
-    public const int rotationW = 30;
     public Quaternion rotation = new Quaternion(rotationX,0,0,0);
 
     void Start() {

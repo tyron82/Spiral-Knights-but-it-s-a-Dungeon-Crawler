@@ -43,18 +43,22 @@ public class PlayerMovement : MonoBehaviour
         //Basic Movement
         if(pressedW){
             position.Translate(0, 0, movementspeed * Time.deltaTime);
+            pressedW = false;
         }
         if (pressedS)
         {
             position.Translate(0, 0, -movementspeed * Time.deltaTime);
+            pressedS = false;
         }
         if (pressedA)
         {
             position.Translate(-movementspeed * Time.deltaTime, 0, 0);
+            pressedA = false;
         }
         if (pressedD)
         {
             position.Translate(movementspeed * Time.deltaTime, 0, 0);
+            pressedD = false;
         }
     }
 }
