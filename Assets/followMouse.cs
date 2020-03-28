@@ -24,7 +24,7 @@ public class followMouse : MonoBehaviour
         float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
 
         //Ta Daaa
-        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        transform.rotation = Quaternion.Euler(new Vector3(0f, -angle, 0f));
     }
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
