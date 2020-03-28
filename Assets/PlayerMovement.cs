@@ -42,22 +42,22 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate() {
         //Basic Movement
         if(pressedW){
-            position.Translate(0, 0, movementspeed * Time.deltaTime);
+            position.Translate(0, 0, movementspeed * Time.deltaTime, Space.World);
             pressedW = false;
         }
         if (pressedS)
         {
-            position.Translate(0, 0, -movementspeed * Time.deltaTime);
+            position.Translate(0, 0, -movementspeed * Time.deltaTime, Space.World);
             pressedS = false;
         }
         if (pressedA)
         {
-            position.Translate(-movementspeed * Time.deltaTime, 0, 0);
+            position.Translate(-movementspeed * Time.deltaTime, 0, 0, Space.World);
             pressedA = false;
         }
         if (pressedD)
         {
-            position.Translate(movementspeed * Time.deltaTime, 0, 0);
+            position.Translate(movementspeed * Time.deltaTime, 0, 0, Space.World);
             pressedD = false;
         }
     }
