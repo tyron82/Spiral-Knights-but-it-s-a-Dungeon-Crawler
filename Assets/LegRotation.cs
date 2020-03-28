@@ -43,49 +43,33 @@ public class LegRotation : MonoBehaviour
         //Basic Movement
         if (pressedW)
         {
-            if (position.rotation.y > 0)
+            if (position.rotation.y != 0)
             {
-                position.Rotate(0, -rotationSpeed, 0);
-            }
-            else if (position.rotation.y < 0)
-            {
-                position.Rotate(0, rotationSpeed, 0);
+                position.Rotate(0, -1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
             }
             pressedW = false;
         }
         if (pressedS)
         {
-            if (position.rotation.y > 180)
+            if (position.rotation.y != 180)
             {
-                position.Rotate(0, -rotationSpeed, 0);
-            }
-            else if (position.rotation.y < 180)
-            {
-                position.Rotate(0, rotationSpeed, 0);
+                position.Rotate(0, 1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
             }
             pressedS = false;
         }
         if (pressedA)
         {
-            if (position.rotation.y > 90)
+            if (position.rotation.y != 90)
             {
-                position.Rotate(0, -rotationSpeed, 0);
-            }
-            else if (position.rotation.y < 90)
-            {
-                position.Rotate(0, rotationSpeed, 0);
+                position.Rotate(0, -1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
             }
             pressedA = false;
         }
         if (pressedD)
         {
-            if (position.rotation.y > -90)
+            if (position.rotation.y != -90)
             {
-                position.Rotate(0, -rotationSpeed, 0);
-            }
-            else if (position.rotation.y < -90)
-            {
-                position.Rotate(0, rotationSpeed, 0);
+                position.Rotate(0, -1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
             }
             pressedD = false;
         }
