@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockBodyToPlayer : MonoBehaviour
+public class huntPlayer : MonoBehaviour
 {
 
-    public Transform lowerBody;
+    public Transform player;
+    int movementspeed;
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = lowerBody.position + new Vector3(0,20,0);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = lowerBody.position + new Vector3(0, 20, 0);
+        
     }
 }
