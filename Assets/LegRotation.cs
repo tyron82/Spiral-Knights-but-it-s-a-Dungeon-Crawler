@@ -4,7 +4,11 @@ public class LegRotation : MonoBehaviour
 {
     //Attributes
     public Transform position;
-    public int rotationSpeed = 5;
+    public int rotationSpeed = 10;
+    int[] orientations = new int[] { 0, 45, 90, 135, 180, 225, 270, 315 };
+    int[] bigOrientations = new int[] { 360, 405, 450, 495, 180, 225, 270, 315 };
+    int[] reverseOrientations = new int[] { 180, 225, 270, 315, 0, 45, 90, 135 };
+    int orientationIndex = 0;
 
     public bool pressedW = false;
     public bool pressedS = false;
@@ -40,38 +44,151 @@ public class LegRotation : MonoBehaviour
     // Used to update Physics, rather than Update()
     void FixedUpdate()
     {
-        //Basic Movement
-        if (pressedW)
+        orientationIndex = findOrientationIndex();
+        Debug.Log(orientationIndex);
+        if (orientationIndex != -1 && position.localEulerAngles.y != orientations[orientationIndex])
         {
-            if (position.rotation.y != 0)
-            {
-                position.Rotate(0, -1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
+            switch(orientationIndex){
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    if (orientations[orientationIndex] <  position.localEulerAngles.y && position.localEulerAngles.y < reverseOrientations[orientationIndex])
+                    {
+                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
+                    }
+                    else {
+                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
+                    }
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    if (reverseOrientations[orientationIndex] < position.localEulerAngles.y && position.localEulerAngles.y < orientations[orientationIndex])
+                    {
+                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
+                    }
+                    else
+                    {
+                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
+                    }
+                    break;
             }
+        }
+    }
+
+    //Find Orientation for lowerbody
+    //Return -1 when unknown orientation or no input
+    //clear input
+    int findOrientationIndex()
+    {
+        //When no negation ex. W & S
+        if (!(pressedW && pressedS) && !(pressedA && pressedD))
+        {
+            if (pressedW && pressedA)
+            {
+                pressedW = false;
+                pressedA = false;
+                return 7;
+            }
+            else if (pressedW && pressedD)
+            {
+                pressedW = false;
+                pressedD = false;
+                return 1;
+            }
+            else if (pressedS && pressedA)
+            {
+                pressedS = false;
+                pressedA = false;
+                return 5;
+            }
+            else if (pressedS && pressedD)
+            {
+                pressedS = false;
+                pressedD = false;
+                return 3;
+            }
+            else if (pressedW)
+            {
+                pressedW = false;
+                return 0;
+            }
+            else if (pressedS)
+            {
+                pressedS = false;
+                return 4;
+            }
+            else if (pressedA)
+            {
+                pressedA = false;
+                return 6;
+            }
+            else if (pressedD)
+            {
+                pressedD = false;
+                return 2;
+            }
+            else
+            {
+                pressedW = false;
+                pressedS = false;
+                pressedA = false;
+                pressedD = false;
+                return -1;
+            }
+
+        }
+        else if ((pressedW && pressedS) && !(pressedA && pressedD))
+        {
+            if (pressedA)
+            {
+                pressedA = false;
+                return 6;
+            }
+            else if (pressedD)
+            {
+                pressedD = false;
+                return 2;
+            }
+            else
+            {
+                pressedW = false;
+                pressedS = false;
+                pressedA = false;
+                pressedD = false;
+                return -1;
+            }
+        }
+        else if (!(pressedW && pressedS) && (pressedA && pressedD))
+        {
+            if (pressedW)
+            {
+                pressedW = false;
+                return 0;
+            }
+            else if (pressedS)
+            {
+                pressedS = false;
+                return 4;
+            }
+            else
+            {
+                pressedW = false;
+                pressedS = false;
+                pressedA = false;
+                pressedD = false;
+                return -1;
+            }
+        }
+        else
+        {
             pressedW = false;
-        }
-        if (pressedS)
-        {
-            if (position.rotation.y != 180)
-            {
-                position.Rotate(0, 1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
-            }
             pressedS = false;
-        }
-        if (pressedA)
-        {
-            if (position.rotation.y != 90)
-            {
-                position.Rotate(0, -1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
-            }
             pressedA = false;
-        }
-        if (pressedD)
-        {
-            if (position.rotation.y != -90)
-            {
-                position.Rotate(0, -1 * Mathf.Sign(position.rotation.y) * rotationSpeed, 0);
-            }
             pressedD = false;
+            return -1;
         }
     }
 }
