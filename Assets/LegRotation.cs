@@ -48,17 +48,21 @@ public class LegRotation : MonoBehaviour
         Debug.Log(orientationIndex);
         if (orientationIndex != -1 && position.localEulerAngles.y != orientations[orientationIndex])
         {
-            switch(orientationIndex){
+            switch (orientationIndex)
+            {
                 case 0:
                 case 1:
                 case 2:
                 case 3:
-                    if (orientations[orientationIndex] <  position.localEulerAngles.y && position.localEulerAngles.y < reverseOrientations[orientationIndex])
+                    if (orientations[orientationIndex] < position.localEulerAngles.y && position.localEulerAngles.y < reverseOrientations[orientationIndex])
                     {
                         position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
+
                     }
-                    else {
+                    else
+                    {
                         position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
+
                     }
                     break;
                 case 4:
@@ -68,10 +72,12 @@ public class LegRotation : MonoBehaviour
                     if (reverseOrientations[orientationIndex] < position.localEulerAngles.y && position.localEulerAngles.y < orientations[orientationIndex])
                     {
                         position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
+
                     }
                     else
                     {
                         position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
+
                     }
                     break;
             }
@@ -144,11 +150,15 @@ public class LegRotation : MonoBehaviour
         {
             if (pressedA)
             {
+                pressedW = false;
+                pressedS = false;
                 pressedA = false;
                 return 6;
             }
             else if (pressedD)
             {
+                pressedW = false;
+                pressedS = false;
                 pressedD = false;
                 return 2;
             }
@@ -165,11 +175,15 @@ public class LegRotation : MonoBehaviour
         {
             if (pressedW)
             {
+                pressedA = false;
+                pressedD = false;
                 pressedW = false;
                 return 0;
             }
             else if (pressedS)
             {
+                pressedA = false;
+                pressedD = false;
                 pressedS = false;
                 return 4;
             }

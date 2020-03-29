@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {fileID: 232034607}
-  rotationSpeed: 5
+  rotationSpeed: 20
   pressedW: 0
   pressedS: 0
   pressedA: 0
