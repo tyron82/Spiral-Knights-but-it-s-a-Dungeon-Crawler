@@ -45,7 +45,6 @@ public class LegRotation : MonoBehaviour
     void FixedUpdate()
     {
         orientationIndex = findOrientationIndex();
-        Debug.Log(orientationIndex);
         if (orientationIndex != -1 && position.localEulerAngles.y != orientations[orientationIndex])
         {
             switch (orientationIndex)
@@ -56,12 +55,14 @@ public class LegRotation : MonoBehaviour
                 case 3:
                     if (orientations[orientationIndex] < position.localEulerAngles.y && position.localEulerAngles.y < reverseOrientations[orientationIndex])
                     {
-                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
+                        position.Rotate(0,-rotationSpeed,0);
+                        //position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
 
                     }
                     else
                     {
-                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
+                        position.Rotate(0, rotationSpeed, 0);
+                        //position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
 
                     }
                     break;
@@ -71,12 +72,14 @@ public class LegRotation : MonoBehaviour
                 case 7:
                     if (reverseOrientations[orientationIndex] < position.localEulerAngles.y && position.localEulerAngles.y < orientations[orientationIndex])
                     {
-                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
+                        position.Rotate(0, rotationSpeed, 0);
+                        //position.localEulerAngles = position.localEulerAngles + new Vector3(0, rotationSpeed, 0);
 
                     }
                     else
                     {
-                        position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
+                        position.Rotate(0, -rotationSpeed, 0);
+                        //position.localEulerAngles = position.localEulerAngles + new Vector3(0, -rotationSpeed, 0);
 
                     }
                     break;
